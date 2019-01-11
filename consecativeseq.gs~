@@ -1,0 +1,6 @@
+list.[].[]=[]
+list.xs.[]=True
+list.[].ys=False
+list.(x::xs).(y::ys)
+       |x==y=list.xs.ys
+       |otherwise=list.xs.(y::ys)

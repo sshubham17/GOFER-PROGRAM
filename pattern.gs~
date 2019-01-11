@@ -1,0 +1,2 @@
+list.[]=[]
+list.(x::xs).n=list.xs.(n+1)

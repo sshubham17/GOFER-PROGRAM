@@ -1,0 +1,4 @@
+sub.[].[]=[]
+sub.(x::xs).(y::ys)
+    |x==y=x::sub.xs.ys
+    |otherwise=sub.xs.ys

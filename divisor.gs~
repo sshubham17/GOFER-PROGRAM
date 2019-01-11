@@ -1,0 +1,6 @@
+div1.(0,y)=0
+div1.(x,0)=1
+div1.(x,y)
+   |y<x=((mod.x.y)==0)=sum.y+div1.(x,y+1)
+   |otherwise = div1.(x,y+1)
+ 

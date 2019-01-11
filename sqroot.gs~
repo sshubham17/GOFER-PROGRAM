@@ -1,0 +1,5 @@
+sroot.x.e.s
+    |abs.(s-x/s)>e=((s+(x/s))/2)
+    |otherwise=s
+
+ff.x.e=sroot.x.e.(1.0)

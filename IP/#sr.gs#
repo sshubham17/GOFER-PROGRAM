@@ -1,0 +1,5 @@
+list_mapper:
+list_mapper.f=each
+where
+each.[]=[]
+each.(x::xs)=f.x::each.xs

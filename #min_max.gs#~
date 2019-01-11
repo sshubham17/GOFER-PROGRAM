@@ -1,0 +1,31 @@
+listt.[].n=[]
+listt.xs.0=[]
+listt.(x::xs).n=take.n.(x::xs)
+
+list.[].n=[]
+list.xs.0=[]
+list.(x::xs).n=listt.(x::xs).n::list.xs.n
+
+lis.n.[]=[]
+lis.n.(x::xs)
+  |n>=x=x::lis.n.xs
+  |otherwise=lis.n.xs
+
+li.[]=[]
+li.(x::xs)=x::li.(lis.x.xs)
+
+lim.n.[]=[]
+lim.n.(x::xs)
+   |n<=x=x::lim.n.xs
+   |otherwise=lim.n.xs
+   
+liss.[]=[]
+liss.(x::xs)=x::liss.(lim.x.xs)
+
+l.[]=[]
+l.(x::xs)=li.(x::xs)
+
+muku.[]=[]
+muku.(x::xs)=l.x++muku.xs
+
+listttt.(x::xs).n=lim.(muku.(list.(x::xs).n))

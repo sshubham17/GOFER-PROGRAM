@@ -1,0 +1,131 @@
+Gofer Version 2.30a
+Modifications for pugofer Rusi Mody
+Copyright (c) Mark P Jones 1991-1994
+Copyright (c) Rusi P Mody  1995-2016
+
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+? 
+ERROR "/home/shubham/s25.gs" (line 4): Syntax error in input (unexpected keyword "where")
+? ERROR: Juxtaposition has no meaning. Use .
+? ERROR: Juxtaposition has no meaning. Use .
+? ERROR: Juxtaposition has no meaning. Use .
+? ERROR: Juxtaposition has no meaning. Use .
+? ? ERROR: Juxtaposition has no meaning. Use .
+? ERROR: Syntax error in expression (unexpected symbol "/")
+? ERROR: Syntax error in expression (unexpected symbol "?")
+? ERROR: Juxtaposition has no meaning. Use .
+? ERROR: Syntax error in expression (unexpected symbol "?")
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? rev.[1,2,3,4,5,6,7]
+[7, 6, 5, 4, 3, 2, 1] : [Int]
+? rev.[]
+[] : [a]
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? rev.[1,2,3,4]
+
+ERROR: Type error in application
+*** expression     : rev.[1,2,3,4]
+*** term           : [1,2,3,4]
+*** type           : [Int]
+*** does not match : [[a]]
+
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? rev.[1,2,3,4]
+[4, 3, 2, 1] : [Int]
+? 
+ERROR "/home/shubham/s25.gs" (line 6): Type error in application
+*** expression     : x + tvs.xs
+*** term           : tvs.xs
+*** type           : [a]
+*** does not match : Int
+
+? 
+ERROR "/home/shubham/s25.gs" (line 6): Type error in application
+*** expression     : [x] + tvs.xs
+*** term           : tvs.xs
+*** type           : [a]
+*** does not match : Int
+
+? 
+ERROR "/home/shubham/s25.gs" (line 6): Type error in application
+*** expression     : [x + 1] + tvs.xs
+*** term           : tvs.xs
+*** type           : [a]
+*** does not match : Int
+
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? tvs.[1,2,3,4]
+[[2], [3], [4], [5]] : [[Int]]
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? tvs.[1,2,3,4]
+[2, 3, 4, 5] : [Int]
+? 
+ERROR "/home/shubham/s25.gs" (line 6): Juxtaposition has no meaning. Use .
+? 
+ERROR "/home/shubham/s25.gs" (line 6): Type error in application
+*** expression     : tvs.xs :: x + 1
+*** term           : x + 1
+*** type           : Int
+*** does not match : [a]
+
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? tvs.[1,2,3,4]
+[2, 3, 4, 5] : [Int]
+? 
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? tvs.[1,2,3,4]
+[0, 1, 2, 3] : [Int]
+? 
+?
+Gofer session for:
+/home/shubham/gofer/pusimple.pre
+/home/shubham/s25.gs
+? 
+ERROR "/home/shubham/s25.gs" (line 10): Undefined variable "fgcd"
+? 
+ERROR "/home/shubham/s25.gs" (line 12): Undefined variable "gfcd"
+? 
+ERROR "/home/shubham/s25.gs" (line 12): Undefined variable "x"
+? 
+ERROR "/home/shubham/s25.gs" (line 10): Undefined variable "fgcd"
+? 
+ERROR "/home/shubham/s25.gs" (line 10): Undefined variable "fgcd"
+? 
+ERROR "/home/shubham/s25.gs" (line 12): Undefined variable "x"
+? 
+ERROR "/home/shubham/s25.gs" (line 10): Undefined variable "fgcd"
+?  
+? 
+ERROR "/home/shubham/s25.gs" (line 12): Undefined variable "x"
+? 
+ERROR "/home/shubham/s25.gs" (line 10): Undefined variable "fgcd"
+? 
+? 
+? 
+? 
+ERROR "/home/shubham/s25.gs" (line 10): Undefined variable "fgcd"
+? 
+? 
+ERROR "/home/shubham/s25.gs" (line 12): Undefined variable "x"
+? 

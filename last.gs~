@@ -1,0 +1,3 @@
+f.(x::xs)=last.xs
+last.[]=0
+last.(x::xs)=1+last.xs

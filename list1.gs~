@@ -1,0 +1,11 @@
+list.[].n=[]
+list.xs.0=[]
+list.(x::xs).n=x::list.xs.(n-1)
+
+remov.[].n=[]
+remov.xs.0=[]
+remov.(x::xs).n=remov.xs.(n-1)
+
+take.[].n=[]
+take.xs.0=[]
+take.(x::xs).n=(list.xs.n)::take.(remov.(xs.(n-1)))

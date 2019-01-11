@@ -1,0 +1,4 @@
+list.x.[]=[]
+list.x.(y::xs)
+    |x==y=list.(y::xs)
+    |otherwise=list.y::ys

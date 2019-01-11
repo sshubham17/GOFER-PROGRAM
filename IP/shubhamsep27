@@ -1,0 +1,386 @@
+sqlite> .table
+marks     students
+sqlite> select students.rollno,students.name,marks.subcode,(select counts from marks)as pass from students,marks where students.rollno=marks.rollno and counts>=40;
+101|shubham|1001|70
+102|mayur|1001|70
+103|akshay|1001|70
+104|aniket|1001|70
+102|mayur|1002|70
+104|aniket|1002|70
+sqlite> .h on
+sqlite> .mod column
+sqlite> select students.rollno,students.name,marks.subcode,(select counts from marks)as pass from students,marks where students.rollno=marks.rollno and counts>=40;
+rollno      name        subcode     pass      
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+102         mayur       1001        70        
+103         akshay      1001        70        
+104         aniket      1001        70        
+102         mayur       1002        70        
+104         aniket      1002        70        
+sqlite> select students.rollno,students.name,marks.subcode,marks.count,(select counts from marks)as pass from students,marks where students.rollno=marks.rollno and counts>=40;
+Error: no such column: marks.count
+sqlite> select students.rollno,students.name,marks.subcode,marks.counts,(select counts from marks)as pass from students,marks where students.rollno=marks.rollno and counts>=40;
+rollno      name        subcode     counts      pass      
+----------  ----------  ----------  ----------  ----------
+101         shubham     1001        70          70        
+102         mayur       1001        62          70        
+103         akshay      1001        58          70        
+104         aniket      1001        42          70        
+102         mayur       1002        45          70        
+104         aniket      1002        50          70        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as pass from students,marks where students.rollno=marks.rollno and counts>=40;
+rollno      name        subcode     pass      
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+102         mayur       1001        62        
+103         akshay      1001        58        
+104         aniket      1001        42        
+102         mayur       1002        45        
+104         aniket      1002        50        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as pass from students,marks where students.rollno=marks.rollno and counts>=40 group by students.rollno;
+rollno      name        subcode     pass      
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+102         mayur       1002        45        
+103         akshay      1001        58        
+104         aniket      1002        50        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as pass from students,marks where students.rollno=marks.rollno and counts>=40 group by students.rollno,marks.subcode;
+rollno      name        subcode     pass      
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+102         mayur       1001        62        
+102         mayur       1002        45        
+103         akshay      1001        58        
+104         aniket      1001        42        
+104         aniket      1002        50        
+sqlite> .read sep26.sql
+
+sqlite> .table
+marks     students
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as pass from students,marks where students.rollno=marks.rollno and counts>=40 group by students.rollno,marks.subcode;
+rollno      name        subcode     pass      
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+101         shubham     1003        66        
+101         shubham     1004        75        
+102         mayur       1001        62        
+102         mayur       1002        45        
+102         mayur       1003        51        
+103         akshay      1001        58        
+103         akshay      1003        75        
+103         akshay      1004        50        
+104         aniket      1001        42        
+104         aniket      1002        50        
+104         aniket      1003        61        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno,marks.subcode,students.name;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+101         shubham     1002        35        
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 ;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+101         shubham     1002        35        
+103         akshay      1002        39        
+102         mayur       1004        35        
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+101         shubham     1002        35        
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+101         shubham     1002        35        
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+sqlite> .read sep26.sql
+
+sqlite> .table
+marks     students
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1003        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1003        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1003        39        
+sqlite> .schema
+CREATE TABLE students (
+rollno int not null,
+name text not null,
+constraint pkc_students primary key(rollno)
+);
+CREATE TABLE marks (
+rollno int not null,
+subcode int not null,
+counts int not null,
+constraint pkc_marks primary key(rollno,subcode),
+foreign key(rollno) references students(rollno)
+);
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.subcode;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+105         neelu       1001        39        
+105         neelu       1002        29        
+105         neelu       1003        39        
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno and marks.subcode;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno or marks.subcode;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.rollno and marks.subcode;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.name;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+103         akshay      1002        39        
+104         aniket      1004        39        
+102         mayur       1004        35        
+105         neelu       1003        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by students.count;
+Error: no such column: students.count
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+105         neelu       1002        29        
+102         mayur       1004        35        
+104         aniket      1004        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts,students.rollno,;
+Error: near ";": syntax error
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts,students.rollno;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+105         neelu       1002        29        
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1003        39        
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts,students.rollno,students.subcode;
+Error: no such column: students.subcode
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1001        39        
+105         neelu       1002        29        
+105         neelu       1003        39        
+sqlite> .read sep26.sql
+
+sqlite> .table
+marks     students
+sqlite> select students.rollno,students.name,marks.subcode,(marks.counts)as fail from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     fail      
+----------  ----------  ----------  ----------
+101         shubham     1002        0         
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1001        39        
+105         neelu       1002        29        
+105         neelu       1003        39        
+sqlite> select students.rollno,students.name,marks.subcode,sum(marks.counts)as totalMark from students,marks where students.rollno=marks.rollno and counts<40 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1002        0         
+102         mayur       1004        35        
+103         akshay      1002        39        
+104         aniket      1004        39        
+105         neelu       1001        39        
+105         neelu       1002        29        
+105         neelu       1003        39        
+sqlite> select students.rollno,students.name,marks.subcode,sum(marks.counts)as totalMark from students,marks where students.rollno=marks.rollno  group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+101         shubham     1002        0         
+101         shubham     1003        66        
+101         shubham     1004        75        
+102         mayur       1001        62        
+102         mayur       1002        45        
+102         mayur       1003        51        
+102         mayur       1004        35        
+103         akshay      1001        58        
+103         akshay      1002        39        
+103         akshay      1003        75        
+103         akshay      1004        50        
+104         aniket      1001        42        
+104         aniket      1002        50        
+104         aniket      1003        61        
+104         aniket      1004        39        
+105         neelu       1001        39        
+105         neelu       1002        29        
+105         neelu       1003        39        
+105         neelu       1004        45        
+sqlite> select students.rollno,students.name,marks.subcode,sum(counts+counts)as totalMark from students,marks where students.rollno=marks.rollno  group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1001        140       
+101         shubham     1002        0         
+101         shubham     1003        132       
+101         shubham     1004        150       
+102         mayur       1001        124       
+102         mayur       1002        90        
+102         mayur       1003        102       
+102         mayur       1004        70        
+103         akshay      1001        116       
+103         akshay      1002        78        
+103         akshay      1003        150       
+103         akshay      1004        100       
+104         aniket      1001        84        
+104         aniket      1002        100       
+104         aniket      1003        122       
+104         aniket      1004        78        
+105         neelu       1001        78        
+105         neelu       1002        58        
+105         neelu       1003        78        
+105         neelu       1004        90        
+sqlite> select students.rollno,students.name,marks.subcode,sum(counts)as totalMark from students,marks where students.rollno=marks.rollno  group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+101         shubham     1002        0         
+101         shubham     1003        66        
+101         shubham     1004        75        
+102         mayur       1001        62        
+102         mayur       1002        45        
+102         mayur       1003        51        
+102         mayur       1004        35        
+103         akshay      1001        58        
+103         akshay      1002        39        
+103         akshay      1003        75        
+103         akshay      1004        50        
+104         aniket      1001        42        
+104         aniket      1002        50        
+104         aniket      1003        61        
+104         aniket      1004        39        
+105         neelu       1001        39        
+105         neelu       1002        29        
+105         neelu       1003        39        
+105         neelu       1004        45        
+sqlite> select students.rollno,students.name,marks.subcode,sum(counts)as totalMark from students,marks where students.rollno=marks.rollno  group by marks.counts,students.rollno,marks.subcode,marks.sum(counts);
+Error: near "(": syntax error
+sqlite> select students.rollno,students.name,marks.subcode,marks.counts,sum(counts)as totalMark from students,marks where students.rollno=marks.rollno  group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     counts      totalMark 
+----------  ----------  ----------  ----------  ----------
+101         shubham     1001        70          70        
+101         shubham     1002        0           0         
+101         shubham     1003        66          66        
+101         shubham     1004        75          75        
+102         mayur       1001        62          62        
+102         mayur       1002        45          45        
+102         mayur       1003        51          51        
+102         mayur       1004        35          35        
+103         akshay      1001        58          58        
+103         akshay      1002        39          39        
+103         akshay      1003        75          75        
+103         akshay      1004        50          50        
+104         aniket      1001        42          42        
+104         aniket      1002        50          50        
+104         aniket      1003        61          61        
+104         aniket      1004        39          39        
+105         neelu       1001        39          39        
+105         neelu       1002        29          29        
+105         neelu       1003        39          39        
+105         neelu       1004        45          45        
+sqlite> select students.rollno,students.name,marks.subcode,marks.counts,sum(counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=students.rollno group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     counts      totalMark 
+----------  ----------  ----------  ----------  ----------
+101         shubham     1001        70          70        
+101         shubham     1002        0           0         
+101         shubham     1003        66          66        
+101         shubham     1004        75          75        
+102         mayur       1001        62          62        
+102         mayur       1002        45          45        
+102         mayur       1003        51          51        
+102         mayur       1004        35          35        
+103         akshay      1001        58          58        
+103         akshay      1002        39          39        
+103         akshay      1003        75          75        
+103         akshay      1004        50          50        
+104         aniket      1001        42          42        
+104         aniket      1002        50          50        
+104         aniket      1003        61          61        
+104         aniket      1004        39          39        
+105         neelu       1001        39          39        
+105         neelu       1002        29          29        
+105         neelu       1003        39          39        
+105         neelu       1004        45          45        
+sqlite> select students.rollno,students.name,marks.subcode,marks.counts,sum(counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     counts      totalMark 
+----------  ----------  ----------  ----------  ----------
+101         shubham     1001        70          70        
+101         shubham     1002        0           0         
+101         shubham     1003        66          66        
+101         shubham     1004        75          75        
+sqlite> select students.rollno,students.name,marks.subcode,sum(counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+101         shubham     1002        0         
+101         shubham     1003        66        
+101         shubham     1004        75        
+sqlite> select students.rollno,students.name,marks.subcode,sum(counts+counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1001        140       
+101         shubham     1002        0         
+101         shubham     1003        132       
+101         shubham     1004        150       
+sqlite> select students.rollno,students.name,marks.subcode,sum(students.counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+Error: no such column: students.counts
+sqlite> select students.rollno,students.name,marks.subcode,sum(marks.counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1001        70        
+101         shubham     1002        0         
+101         shubham     1003        66        
+101         shubham     1004        75        
+sqlite> select students.rollno,students.name,marks.subcode,sum.(marks.counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+Error: near "(": syntax error
+sqlite> select students.rollno,students.name,marks.subcode,sum(marks.subcode,marks.counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by marks.counts,students.rollno,marks.subcode;
+Error: wrong number of arguments to function sum()
+sqlite> select students.rollno,students.name,marks.subcode,sum(marks.counts)as totalMark from students,marks where students.rollno=marks.rollno and students.rollno=101 group by students.rollno;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1004        211       
+sqlite> select students.rollno,students.name,marks.subcode,sum(marks.counts)as totalMark from students,marks where students.rollno=marks.rollno group by students.rollno;
+rollno      name        subcode     totalMark 
+----------  ----------  ----------  ----------
+101         shubham     1004        211       
+102         mayur       1004        193       
+103         akshay      1004        222       
+104         aniket      1004        192       
+105         neelu       1004        152       
+sqlite> ^C
+sqlite> 
+

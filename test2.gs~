@@ -1,0 +1,8 @@
+rev.[].z=[]
+rev.(x::xs).z=rev.xs.z++[x]
+
+fun.[].z=[]
+fun.(x::xs).z=[z++x]++fun.xs.(z++[0])
+
+f3.(x::xs).z=fun.(rev.(x::xs).z)
+

@@ -1,0 +1,4 @@
+list.n.[]=[]
+list.n.(x::xs)
+   |n/=x=x::list.xs
+   |otherwise=list.xs

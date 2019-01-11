@@ -1,0 +1,24 @@
+nth: [Int] -> Int -> Int
+--nth.[].n=undefined
+nth.(x::l).0=x
+nth.(x::l).n=nth.l.(n-1)
+
+inner: [Int] -> [Int] -> Int
+inner.[].[]=0
+inner.l1.[]=0
+inner.[].l1=0
+inner.(x::l1).(y::l2)=(x*y)+inner.l1.l2
+
+take1: [Int] -> Int -> [Int]
+take1.(x::l).0=[]
+take1.(x::l).n=x::s
+   where s=take1.l.(n-1)
+
+take2.(x::xs).0=[]
+take2.(x::xs).n=x::take2.xs.(n-1)
+
+
+m.x.y 
+     | x <= y = y
+     | otherwise = x
+

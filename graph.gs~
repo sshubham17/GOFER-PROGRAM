@@ -1,0 +1,12 @@
+f.(x,y)=x
+s.(x,y)=y
+
+gettuple.[].v.v1=[]
+gettuple.(x::xs).v.v1
+  |(f.(x)==v) && (s.(x)==v1)=[x]
+  |(f.(x)==v) &&(s.(x) /= v1)=[x]++gettuple.xs.(s.(x)).v
+  |otherwise=gettuple.xs.v.v1
+
+pos.[].x=[]
+pos.(x::xs).1=x
+pos.(x::xs).n=pos.xs.(n-1)

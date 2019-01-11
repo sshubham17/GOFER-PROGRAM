@@ -1,0 +1,15 @@
+
+--s.0=0
+
+fac.0=1
+fac.n=(n*fac.(n-1))
+
+s.x=(mod.x.10)
+d1.x=x/10
+
+rev.0=[]
+rev.x=(mod.x.10)::rev.(d1.x)
+
+strong.0=[]
+strong.x=(mod.x.10)::strong.(fac.x)::strong.(d1.x)
+

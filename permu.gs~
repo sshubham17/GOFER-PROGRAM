@@ -1,0 +1,11 @@
+per.0.xs=[[]]
+per.(n+1).[]=[]
+per.(n+1).(x::xs)=map.(x::).(per.n.xs)++per.(n+1).xs
+
+rev.[]=[]
+rev.(x::xs)=rev.xs++[x]
+
+rev1.[]=[]
+rev1.(x::xs)=rev.x::rev1.xs
+
+per1.(n+1).(x::xs)=per.(n+1).(x::xs)++rev1.(per.(n+1).(x::xs))

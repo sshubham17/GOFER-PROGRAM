@@ -1,0 +1,8 @@
+create table Hostel
+(
+   H_name TEXT NOT NULL,
+   H_no INT NOT NULL,
+   H_roomno INT NOT NULL,
+   H_members INT,   
+   CONSTRAINTS PKC_Hostel(H_no),
+);

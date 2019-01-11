@@ -1,0 +1,12 @@
+d.x=x/10
+
+rev.0=[]
+rev.x=(mod.x.10)::rev.(d.x)
+
+swap.[]=[]
+swap.[x]=[x]
+swap.(x::y::xs)=y::x::swap.xs
+
+re.x=(rem.x.10)
+
+

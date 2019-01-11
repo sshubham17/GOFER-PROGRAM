@@ -1,0 +1,2 @@
+list.[].n=[]
+list.(x::xs).n=drop.n.(x::xs)++take.n.(x::xs)
